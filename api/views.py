@@ -7,13 +7,19 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from api.models import Movie, Rating
-from api.serializers import MovieSerializer, RatingSerializer
+from api.serializers import MovieSerializer, RatingSerializer, UserSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 
 class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
-    authentication_classes = (TokenAuthentication, )
+    authentication_classes = (TokenAuthentication,)
 
     # authentication_classes =
     @action(methods=['POST'], detail=True)
@@ -42,4 +48,4 @@ class MovieViewSet(viewsets.ModelViewSet):
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
-    authentication_classes = (TokenAuthentication, )
+    authentication_classes = (TokenAuthentication,)
