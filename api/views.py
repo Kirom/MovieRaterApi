@@ -13,6 +13,7 @@ class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
 
+    # authentication_classes =
     @action(methods=['POST'], detail=True)
     def rate_movie(self, request, pk=None):
         if 'stars' in request.data:
