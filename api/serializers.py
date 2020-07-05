@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from rest_framework.authtoken.models import Token
 
 from api.models import Movie, Rating
 
@@ -12,6 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
+        Token.objects.create(user=user)
         return user
 
 

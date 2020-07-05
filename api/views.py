@@ -4,6 +4,7 @@ from django.shortcuts import render
 from rest_framework import viewsets, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.models import Movie, Rating
@@ -15,11 +16,11 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-
 class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
     authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
     # authentication_classes =
     @action(methods=['POST'], detail=True)
@@ -49,3 +50,10 @@ class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
     authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def create(self, request, *args, **kwargs):
+        return Response({'message': "You can't create rating like that."})
+
+    def update(self, request, *args, **kwargs):
+        return Response({'message': "You can't update rating like that."})
