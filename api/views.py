@@ -1,10 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.shortcuts import render
-from rest_framework import viewsets, status
+from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
 from api.models import Movie, Rating
@@ -14,6 +13,7 @@ from api.serializers import MovieSerializer, RatingSerializer, UserSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (AllowAny,)
 
 
 class MovieViewSet(viewsets.ModelViewSet):
