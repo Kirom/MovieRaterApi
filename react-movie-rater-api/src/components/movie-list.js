@@ -1,22 +1,47 @@
 import React from 'react';
 
+const FontAwesome = require('react-fontawesome')
+
 function MovieList(props) {
 
     const movieClicked = movie => evt => {
         props.movieClicked(movie)
     }
 
+    const editClicked = movie => {
+        props.editClicked(movie)
+    }
+
+    const removeClicked = movie => {
+        fetch(`http://localhost:8000/api/movies/${movie.id}/`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token 88aa3b76a55365cdfb5670c1a2667e719cd6d1f7'
+                }
+            }).then(resp => props.movieDeleted(movie))
+            .catch(error => console.log(error))
+    };
+
+    const newMovie = () => {
+        props.newMovie();
+    }
+
     return (
         <div>
-            {
-                props.movies.map(movie => {
-                    return (
-                        <h3 key={movie.id} onClick={movieClicked(movie)}>
+            {props.movies.map(movie => {
+                return (
+                    <div key={movie.id} className='movie-item'>
+                        <h3 onClick={movieClicked(movie)}>
                             {movie.title}
                         </h3>
-                    )
-                })
-            }
+                        <FontAwesome name='edit' onClick={() => editClicked(movie)}/>
+                        <FontAwesome name='trash' onClick={() => removeClicked(movie)}/>
+                    </div>
+                )
+            })}
+            <button onClick={newMovie}>Add new</button>
         </div>
     )
 }

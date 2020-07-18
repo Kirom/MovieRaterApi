@@ -49,11 +49,11 @@ class MovieDetails extends Component {
                 {movie ? (
                     <div>
                         <h3>{movie.title}</h3>
-                        <FontAwesome name={'star'} className={movie.avg_rating > 0 ? 'orange' : ''}/>
-                        <FontAwesome name={'star'} className={movie.avg_rating > 1 ? 'orange' : ''}/>
-                        <FontAwesome name={'star'} className={movie.avg_rating > 2 ? 'orange' : ''}/>
-                        <FontAwesome name={'star'} className={movie.avg_rating > 3 ? 'orange' : ''}/>
-                        <FontAwesome name={'star'} className={movie.avg_rating > 4 ? 'orange' : ''}/>
+                        <FontAwesome name='star' className={movie.avg_rating > 0 ? 'orange' : ''}/>
+                        <FontAwesome name='star' className={movie.avg_rating > 1 ? 'orange' : ''}/>
+                        <FontAwesome name='star' className={movie.avg_rating > 2 ? 'orange' : ''}/>
+                        <FontAwesome name='star' className={movie.avg_rating > 3 ? 'orange' : ''}/>
+                        <FontAwesome name='star' className={movie.avg_rating > 4 ? 'orange' : ''}/>
                         ({movie.num_of_ratings})
                         <p>{movie.description}</p>
 
